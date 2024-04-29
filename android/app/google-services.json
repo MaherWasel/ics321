@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "242374988018",
+    "project_id": "ics321-3e96e",
+    "storage_bucket": "ics321-3e96e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:242374988018:android:d5c9fc60bd162297a3406b",
+        "android_client_info": {
+          "package_name": "com.example.ics321"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-yH8-My8AeP3cFYNBt_KJt4fgxCBg81M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
