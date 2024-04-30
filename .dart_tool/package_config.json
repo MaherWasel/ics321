@@ -170,6 +170,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "google_fonts",
+      "rootUri": "file:///Users/maher/.pub-cache/hosted/pub.dev/google_fonts-5.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "gotrue",
       "rootUri": "file:///Users/maher/.pub-cache/hosted/pub.dev/gotrue-2.6.1",
       "packageUri": "lib/",
@@ -530,7 +536,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-04-29T10:01:20.232662Z",
+  "generated": "2024-04-29T14:35:00.898652Z",
   "generator": "pub",
   "generatorVersion": "3.2.0"
 }

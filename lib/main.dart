@@ -2,7 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ics321/core/theme/app_theme.dart';
 import 'package:ics321/firebase_options.dart';
+import 'package:ics321/modules/auth/presentation/screens/splash_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async{
@@ -23,9 +26,9 @@ void main() async{
         Locale('ar', 'SA'),
         Locale('en', 'US')
       ],
-      saveLocale: true,
+     
       path: 'assets/translation', 
-      child: const MyApp())); 
+      child: const ProviderScope(child: MyApp()))); 
 }
 
 class MyApp extends StatelessWidget {
@@ -36,14 +39,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      theme: lightTheme,
+
+      locale: context.locale, 
       localizationsDelegates:
       context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      supportedLocales: context.supportedLocales, 
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
     );
   }
 }
