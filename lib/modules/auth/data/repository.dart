@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ics321/modules/auth/data/auth_backend.dart';
+import 'package:ics321/shared/models/user.dart';
 
 class AuthRepository {
   String? verficationId;
   FirebaseAuth authInstance=FirebaseAuth.instance;
+  AuthBackEnd authBackEnd = AuthBackEnd();
   Stream<User?> getAuthState()=>authInstance.authStateChanges();
   
 
@@ -31,14 +34,12 @@ class AuthRepository {
       });
       return verficationId;
   }
-  Future<UserCredential?> verifySmS({required String otp})async{
+  Future<UserModel?> verifySmS({required String otp, String? phoneNum})async{
 
     PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verficationId??"", smsCode: otp);
-     final userCredential=await authInstance.signInWithCredential(credential);
-     return userCredential;
+     final response=await authInstance.signInWithCredential(credential);
+    final backendResponse = authBackEnd.authenticateUser(id: response.user?.uid??"",phoneNumber: phoneNum);
+     return backendResponse;
 
   }
-}
-void main(){
-
 }

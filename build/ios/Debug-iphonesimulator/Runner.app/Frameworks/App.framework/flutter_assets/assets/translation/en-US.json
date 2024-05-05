@@ -1,1 +1,12 @@
-{}
+{
+    "traveller":"Traveller",
+    "05********":"05********",
+    "lang":"العربيه",
+    "enterPhone":"Please Enter your PhoneNumber",
+    "submit":"Submit",
+    "Please Enter Valid PhoneNumber":"Please Enter Valid PhoneNumber",
+    "enterSMS": "Please Enter the sms code",
+    "settings":"Settings",
+    "home":"Home",
+    "myTickets":"MyTickets"
+}

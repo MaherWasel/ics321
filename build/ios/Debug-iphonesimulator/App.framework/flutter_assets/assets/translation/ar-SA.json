@@ -1,1 +1,13 @@
-{}
+{
+    "traveller":"المسافر",
+    "05********":"50*********",
+    "lang":"English",
+
+    "enterPhone":"الرجا ادخال رقم الهاتف",
+    "submit":"تاكيد",
+    "Please Enter Valid PhoneNumber": "الرجاادخال رقم جوال صحيح",
+    "enterSMS": "الرجا ادخال رمز التحقق",
+    "settings":"الاعدادات",
+    "myTickets":"تذكراتي",
+    "home":"الرئيسيه"
+}

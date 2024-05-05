@@ -1,7 +1,12 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/core/utils/utils.dart';
+import 'package:ics321/modules/auth/data/auth_backend.dart';
 import 'package:ics321/modules/auth/data/repository.dart';
+
+
+
 
 abstract class AuthStates{}
 class AuthIntial extends AuthStates{}
@@ -16,6 +21,7 @@ class AuthStateNotifier extends StateNotifier<AuthStates> {
   String? verficationId="";
   String phoneNum="";
   final smsInput=["","","","","",""];
+  final AuthBackEnd authBackEnd=AuthBackEnd();
   Future<void> sendOtp()async{
     try{
       state = AuthLoading();
@@ -43,11 +49,12 @@ class AuthStateNotifier extends StateNotifier<AuthStates> {
     }
     try{
       state = AuthLoading();
-      final userInf=await authRepo.verifySmS( otp: sms);
-      Utils.userId=userInf?.user?.uid??"";
+      final userInf=await authRepo.verifySmS( otp: sms,phoneNum: phoneNum);
+      Utils.user=userInf;
+      
       state=AuthSucess();
     }
-    on FirebaseAuthException {
+    on Exception {
       state=AuthFailure();
     }
   }

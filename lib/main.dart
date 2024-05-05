@@ -6,18 +6,24 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/core/theme/app_theme.dart';
 import 'package:ics321/firebase_options.dart';
 import 'package:ics321/modules/auth/presentation/screens/splash_screen.dart';
+import 'package:ics321/modules/home/presentation/screen/home_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 void main() async{
     await Supabase.initialize(
-    url: 'https://pmtnbgcrtftwvxmwivqa.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtdG5iZ2NydGZ0d3Z4bXdpdnFhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQzNzU0MTEsImV4cCI6MjAyOTk1MTQxMX0.a4tD-7Z1aBkixS4pcUzouwrWYAcj1W6-1u9qi1ZnICM',
+    url: 'https://vlnrnqnzdsmjtpxhvivi.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsbnJucW56ZHNtanRweGh2aXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ3MTgxNzcsImV4cCI6MjAzMDI5NDE3N30.Xb27CtuPD31ihBhs4-otSgtc6Ed_r4CgHFLV0I70B4I',
   );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseAuth.instance.signOut();
   await EasyLocalization.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
+
+
+
 
   runApp(EasyLocalization(
       startLocale:

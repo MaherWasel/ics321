@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/core/utils/utils.dart';
+import 'package:ics321/modules/auth/data/auth_backend.dart';
 import 'package:ics321/modules/auth/presentation/provider/providers.dart';
 import 'package:ics321/modules/auth/presentation/widgets/froasted_glass.dart';
 import 'package:ics321/modules/auth/presentation/widgets/login_container.dart';
 import 'package:ics321/modules/auth/presentation/widgets/verify_sms_container.dart';
+import 'package:ics321/modules/home/presentation/screen/home_screen.dart';
 import 'package:ics321/shared/custom_text.dart';
 
 class LoginScreen extends ConsumerWidget{
@@ -22,11 +24,9 @@ class LoginScreen extends ConsumerWidget{
         if (snapshot.hasData){
           Utils.userId=snapshot.data?.uid??"";
           // would be changed when we do the home page
-          return  Scaffold(
-            body: Center(child: 
-            ElevatedButton(onPressed: (){
-              FirebaseAuth.instance.signOut();
-            }, child: const Text("logout")),));
+
+          AuthBackEnd().authenticateUser(id: Utils.userId,phoneNumber: ref.read(authStateProvider.notifier).phoneNum);
+          return  const HomeScreen();
         }
         
         return Scaffold(
