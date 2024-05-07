@@ -10,6 +10,7 @@ import 'package:ics321/modules/auth/presentation/widgets/login_container.dart';
 import 'package:ics321/modules/auth/presentation/widgets/verify_sms_container.dart';
 import 'package:ics321/modules/home/presentation/screen/home_screen.dart';
 import 'package:ics321/shared/custom_text.dart';
+import 'package:uuid/uuid_value.dart';
 
 class LoginScreen extends ConsumerWidget{
   const LoginScreen({super.key});
@@ -18,14 +19,13 @@ class LoginScreen extends ConsumerWidget{
   Widget build(BuildContext context,WidgetRef ref) {
     final sizes = MediaQuery.of(context).size;
     final authState= ref.watch(authStateProvider);
-    return StreamBuilder<User?>(
-      stream: ref.read(authStateProvider.notifier).getAuthUserState(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData){
-          Utils.userId=snapshot.data?.uid??"";
+    return Builder(
+
+      builder: (context) {
+        if (authState is AuthSucess){
+          // Utils.userId=UuidValue.fromString(snapshot.data?.uid??"").toFormattedString();
           // would be changed when we do the home page
 
-          AuthBackEnd().authenticateUser(id: Utils.userId,phoneNumber: ref.read(authStateProvider.notifier).phoneNum);
           return  const HomeScreen();
         }
         

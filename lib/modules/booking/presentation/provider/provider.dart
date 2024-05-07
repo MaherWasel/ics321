@@ -52,8 +52,10 @@ class BookingController extends StateNotifier<BookingStates> {
       state=BookingLoading();
       await bookingRepository.sendTicket(flight_id: flight_id, price: price, seatLocation: seatLocation);
       state=BookingSuccess();
-    } 
+
+;    } 
     catch(e){
+
       state=BookingFailure();
     }
 

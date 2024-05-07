@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ics321/core/utils/utils.dart';
 import 'package:ics321/modules/auth/data/auth_backend.dart';
 import 'package:ics321/shared/models/user.dart';
 
@@ -38,7 +39,8 @@ class AuthRepository {
 
     PhoneAuthCredential credential = PhoneAuthProvider.credential(verificationId: verficationId??"", smsCode: otp);
      final response=await authInstance.signInWithCredential(credential);
-    final backendResponse = authBackEnd.authenticateUser(id: response.user?.uid??"",phoneNumber: phoneNum);
+    final backendResponse = await authBackEnd.authenticateUser(id: response.user?.uid??"",phoneNumber: phoneNum);
+    Utils.userId=response.user?.uid??"";
      return backendResponse;
 
   }

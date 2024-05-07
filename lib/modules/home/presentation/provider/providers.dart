@@ -54,7 +54,7 @@ class HomeController extends StateNotifier<HomeStates> {
     }
 
 }
-final homeControllerProvider = StateNotifierProvider<HomeController,HomeStates>((ref) {
+final homeControllerProvider = StateNotifierProvider.autoDispose<HomeController,HomeStates>((ref) {
   return HomeController();
 });
 
@@ -65,6 +65,6 @@ class BottomBarController extends StateNotifier<int> {
   }
   
 }
-final bottomBarProvider = StateNotifierProvider<BottomBarController,int>((ref) {
+final bottomBarProvider = StateNotifierProvider.autoDispose<BottomBarController,int>((ref) {
   return BottomBarController();
 });

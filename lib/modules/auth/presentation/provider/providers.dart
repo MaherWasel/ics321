@@ -49,8 +49,8 @@ class AuthStateNotifier extends StateNotifier<AuthStates> {
     }
     try{
       state = AuthLoading();
-      final userInf=await authRepo.verifySmS( otp: sms,phoneNum: phoneNum);
-      Utils.user=userInf;
+     await authRepo.verifySmS( otp: sms,phoneNum: phoneNum);
+
       
       state=AuthSucess();
     }
@@ -60,6 +60,6 @@ class AuthStateNotifier extends StateNotifier<AuthStates> {
   }
   Stream<User?> getAuthUserState()=>authRepo.getAuthState();
 }
-final authStateProvider = StateNotifierProvider<AuthStateNotifier,AuthStates>((ref) {
+final authStateProvider = StateNotifierProvider.autoDispose<AuthStateNotifier,AuthStates>((ref) {
   return AuthStateNotifier();
 });

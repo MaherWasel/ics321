@@ -3,10 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/core/utils/utils.dart';
+import 'package:ics321/modules/auth/presentation/screens/splash_screen.dart';
 import 'package:ics321/modules/home/presentation/provider/providers.dart';
 import 'package:ics321/modules/home/presentation/widget/bottom_bar.dart';
 import 'package:ics321/modules/home/presentation/widget/flight_card.dart';
 import 'package:ics321/modules/home/presentation/widget/profile_setting.dart';
+import 'package:ics321/modules/my_tickets/presentation/screen/myTickets.dart';
 import 'package:ics321/shared/custom_text.dart';
 
 class HomeScreen extends ConsumerWidget{
@@ -22,6 +24,7 @@ class HomeScreen extends ConsumerWidget{
             actions: [
               TextButton(onPressed: (){
                 FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const SplashScreen()));
                 Utils.user=null;
                 
               }, child: Row(
@@ -35,7 +38,7 @@ class HomeScreen extends ConsumerWidget{
                   color: Colors.white,),
                 ],
               )),
-              Spacer(),
+              const Spacer(),
               TextButton(onPressed: (){
                 if (Utils.appOnAr){
                   context.setLocale(const Locale("en","US"));
@@ -69,14 +72,17 @@ class HomeScreen extends ConsumerWidget{
 
           }
           else if (bottomBarIndex ==1 ){
-            return Text("data");
+            return const Center(child:  MyTicketsScreen());
+          }
+          else if (bottomBarIndex==2 && Utils.user!.isAdmin!){
+            return const Text("wd");
           }
           else {
             return Center(child: ProfileCard());
           }
         }
       ),
-      bottomNavigationBar:  ButtomBar(),
+      bottomNavigationBar:  const ButtomBar(),
     );
   }
 

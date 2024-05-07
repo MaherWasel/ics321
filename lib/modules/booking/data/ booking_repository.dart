@@ -40,11 +40,12 @@ class BookingRepository{
 
   }
   Future<void> sendTicket({required String flight_id,required double price,required String seatLocation})async {
+
     await Supabase.instance.client.from("Ticket").insert(
       {"flight_id":flight_id,
       "price":price,
       "seat_location":seatLocation,
-      "user_id":Utils.user!.id}
+      "user_id":UuidValue.fromString(Utils.userId).toFormattedString()}
       );
     await Supabase.instance.client.from("Seat").update({"status":"Reserved"}).eq("location", seatLocation).eq("flight_id", flight_id);
   }

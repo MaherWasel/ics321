@@ -124,7 +124,7 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
                          await ref.read(bookingStateProvider.notifier).getPlane(planeId: widget.flight.planeId);
             
                       if (ref.read(bookingStateProvider.notifier).selectedPlane!=null){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PlaneInfoScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const PlaneInfoScreen()));
             
                       }
                       }, child: Row(
@@ -183,13 +183,13 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 if (selectedSeat!=null)
                 Builder(
                   builder: (context) {
                     if (bookingState is BookingLoading){
-                      return Padding(
-                        padding: const EdgeInsets.all(16.0),
+                      return const Padding(
+                        padding: EdgeInsets.all(16.0),
                         child: Center(child: CircularProgressIndicator()),
                       );
                     }
@@ -213,7 +213,7 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
 
                            }
                           await ref.read(bookingStateProvider.notifier).sendTicket(flight_id: widget.flight.id, price: price, seatLocation: selectedSeat!);
-                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>SuccessBookingScreen()));
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const SuccessBookingScreen()));
                         })),
                     );
                   }
