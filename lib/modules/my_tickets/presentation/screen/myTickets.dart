@@ -5,6 +5,7 @@ import 'package:ics321/modules/my_tickets/data/ticket_repository.dart';
 import 'package:ics321/modules/my_tickets/presentation/provider/provider.dart';
 import 'package:ics321/modules/my_tickets/presentation/widget/ticket_card.dart';
 import 'package:ics321/shared/custom_button.dart';
+import 'package:ics321/shared/custom_text.dart';
 import 'package:uuid/uuid.dart';
 
 class MyTicketsScreen extends StatefulWidget{
@@ -31,6 +32,11 @@ class _MyTicketsScreenState extends State<MyTicketsScreen> {
 
         else if (snapshot.hasData && snapshot.data!=null){
           final listOfTickets= snapshot.data!;
+          if (listOfTickets.isEmpty){
+            return Center(
+              child: CustomText("noTicketsFound"),
+            );
+          }
           return ListView.builder(
             itemCount: listOfTickets.length,
             itemBuilder: (context,index){

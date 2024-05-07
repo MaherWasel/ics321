@@ -204,7 +204,7 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
                             price=widget.flight.economy_price!;
 
                           }
-                           if (ref.read(bookingStateProvider.notifier).selectedType=="Bussiness"){
+                           else if (ref.read(bookingStateProvider.notifier).selectedType=="Business"){
                             price=widget.flight.business_price!;
 
                            }

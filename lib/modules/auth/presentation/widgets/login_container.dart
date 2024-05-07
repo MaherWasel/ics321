@@ -32,16 +32,17 @@ class LoginContainer extends ConsumerWidget {
                 height: 100,
               ),
               LoginIcon(),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Align(
-                  alignment: Utils.appOnAr?Alignment.centerRight:Alignment.centerLeft,
-                  child: CustomText(
-                    "enterPhone".tr(),
-                    fontsize: sizes.width*0.045,
-                    color: Theme.of(context).colorScheme.primary,
-                    weight: FontWeight.w500,),
-                ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: CustomText(
+                      "enterPhone".tr(),
+                      fontsize: sizes.width*0.045,
+                      color: Theme.of(context).colorScheme.primary,
+                      weight: FontWeight.w500,),
+                  ),
+                ],
               ),
               const Padding(
                 padding: EdgeInsets.all(8.0),
