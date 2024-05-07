@@ -10,13 +10,18 @@ class FlightModel {
   final String destination;
   final DateTime time;
   final String planeId;
-  FlightModel({
+  final double? economy_price;
+  final double? business_price;
+  final double? first_price;
+  FlightModel( {
+    this.economy_price, this.business_price, this.first_price,
     required this.id,
     required this.date,
     required this.source,
     required this.destination,
     required this.time,
-    required this.planeId
+    required this.planeId,
+
   });
   // Map<String, dynamic> toJson() {
   //   return <String, dynamic>{
@@ -33,6 +38,9 @@ class FlightModel {
   factory FlightModel.fromMap(Map<String, dynamic> map) {
     return FlightModel(
       id:  map["id"],
+      first_price:map["first_price"]*1.0,
+      business_price:map["business_price"]*1.0,
+      economy_price:map["economy_price"] *1.0,
       date: DateTime.parse(map["date"]),
 
       source: map['source'] ,

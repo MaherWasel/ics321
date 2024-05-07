@@ -8,9 +8,11 @@ import 'package:ics321/shared/custom_button.dart';
 import 'package:ics321/shared/custom_text.dart';
 
 class ProfileCard extends ConsumerWidget{
-  static GlobalKey<FormState> formKey_=GlobalKey<FormState>();
   @override
+  
   Widget build(BuildContext context,WidgetRef ref) {
+    GlobalKey<FormState> formKey_=GlobalKey<FormState>();
+
     final homeState= ref.watch(homeControllerProvider);
     final sizes=MediaQuery.of(context).size;
     return  Form(

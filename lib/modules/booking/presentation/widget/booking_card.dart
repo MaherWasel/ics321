@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/modules/booking/presentation/provider/provider.dart';
 import 'package:ics321/modules/booking/presentation/screen/plane_info.dart';
+import 'package:ics321/modules/booking/presentation/widget/class_choices.dart';
 import 'package:ics321/shared/custom_button.dart';
 import 'package:ics321/shared/custom_text.dart';
 import 'package:ics321/shared/models/flight.dart';
 
 class BookingCard extends ConsumerWidget{
   final FlightModel flight;
-
-  const BookingCard({super.key, required this.flight});
+  final Function  onClick;
+  const BookingCard( {required this.onClick,super.key, required this.flight});
+  
   getFormatedDate(DateTime _date, bool time) {
 
     if (time){
@@ -20,9 +22,11 @@ class BookingCard extends ConsumerWidget{
     }
     var outputFormat = DateFormat('dd/MM/yyyy');
     return outputFormat.format(_date);
+
     }
   @override
   Widget build(BuildContext context,WidgetRef ref) {
+    
     final sizes=MediaQuery.of(context).size;
     final bookingStates=ref.watch(bookingStateProvider);
     return Card(
@@ -102,7 +106,14 @@ class BookingCard extends ConsumerWidget{
               width: sizes.width/2,
               child: CustomButton(
                 child: CustomText("book".tr()), onPressed: () {
-                
+                  showBottomSheet(context: context, builder: (context)=>
+                  Builder(
+                    builder: (context) {
+                      return SizedBox(
+                        height: 350,
+                        child: ClassChoices(flight: flight,onClick:onClick));
+                    }
+                  ));
                 }),
             )
           ],

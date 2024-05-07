@@ -27,5 +27,9 @@
     "next_maintanance":"Next Maintanance",
     "numOfEco":"Number of Economics Class Seats",
     "numOfBus":"Number Of Bussiness Class Seats",
-    "numOfFir":"Number of First Class Seats"
+    "numOfFir":"Number of First Class Seats",
+    "planeInfoSc":"Plane Info Screen",
+    "errorTryLater":"Error Occured Please try again later",
+    "bookingConfirmation":"Booking Confirmation",
+    "seatLocation":"Seat Location"
 }

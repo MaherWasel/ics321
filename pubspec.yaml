@@ -46,6 +46,7 @@ dependencies:
   date_time: ^0.10.0
   intl: ^0.18.1
   uuid: ^4.4.0
+  font_awesome_flutter: ^10.7.0
 
 dev_dependencies:
   flutter_test:

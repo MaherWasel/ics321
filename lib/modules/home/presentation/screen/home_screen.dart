@@ -17,6 +17,7 @@ class HomeScreen extends ConsumerWidget{
     final bottomBarIndex=ref.watch(bottomBarProvider);
     return Scaffold(
      appBar: AppBar(
+      automaticallyImplyLeading: false,
       backgroundColor: Theme.of(context).colorScheme.primary,
             actions: [
               TextButton(onPressed: (){

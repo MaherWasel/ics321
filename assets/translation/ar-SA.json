@@ -29,5 +29,9 @@
     "next_maintanance":"الصيانه القادمه",
     "numOfEco":"عدد مقاعد الدرجه الاقتصاديه",
     "numOfBus":"عدد مقاعد درجه الاعمال",
-    "numOfFir":"عدد مقاعد الدرجه الاولي"
+    "numOfFir":"عدد مقاعد الدرجه الاولي",
+    "planeInfoSc":"صفحة معلومات الطائره",
+    "errorTryLater":"حدث ايرور حاول مجددا",
+    "bookingConfirmation":"تاكيد الحجز",
+    "seatLocation": "موقع الكرسي"
 }
