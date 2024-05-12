@@ -19,6 +19,7 @@ class HomeRepository{
 
   }
   List<FlightModel> filterFlights({required List<FlightModel> listOfFlights, DateTime? date,String? source,String? destination}){
+    listOfFlights=listOfFlights.where((e) => e.date.isAfter(DateTime.now())).toList();
     if (date ==null && source ==null && destination ==null){
       return listOfFlights;
     }
@@ -56,8 +57,3 @@ class HomeRepository{
   
   
 }
-
-  final List<FlightModel> dummyData =[
-    FlightModel(id: "id", date: DateTime.now(), source: "Hasa AirPort", destination: "Jeddah AirPort", time: DateTime.now(), planeId: "planeId"),
-    FlightModel(id: "idawdwa", date: DateTime.now(), source: "Riyadh AirPort", destination: "Hasa AirPort", time: DateTime.now(), planeId: "planeawdawId")
-  ];

@@ -31,10 +31,12 @@ class ButtomBar extends ConsumerWidget{
       ),
       if (Utils.user?.isAdmin!=null && Utils.user!.isAdmin!)
       BottomNavigationBarItem(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         icon: const Icon(Icons.admin_panel_settings_outlined),
         label: 'admin'.tr(),
       ),
       BottomNavigationBarItem(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         icon: const Icon(Icons.settings),
         label: 'settings'.tr(),
       ),

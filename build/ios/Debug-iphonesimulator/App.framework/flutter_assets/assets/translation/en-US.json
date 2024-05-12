@@ -30,5 +30,13 @@
     "numOfFir":"Number of First Class Seats",
     "planeInfoSc":"Plane Info Screen",
     "errorTryLater":"Error Occured Please try again later",
-    "bookingConfirmation":"Booking Confirmation"
+    "bookingConfirmation":"Booking Confirmation",
+    "seatLocation":"Seat Location",
+    "status":"Status",
+    "pay":"Pay",
+    "notPaid":"Not Paid",
+    "sr":"SR",
+    "deleteTicket":"Delete The Ticket",
+    "admin":"Admin",
+    "manage":"Manage"
 }

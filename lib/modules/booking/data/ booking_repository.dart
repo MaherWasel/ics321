@@ -1,13 +1,13 @@
 import 'package:ics321/core/utils/utils.dart';
-import 'package:ics321/modules/booking/domain/plane.dart';
+import 'package:ics321/shared/models/plane.dart';
 import 'package:ics321/modules/booking/domain/seat.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 class BookingRepository{
   Future<Plane?> getPlane({required String planeId})async {
-    final response= await Supabase.instance.client.from("Plane").select();
-    print(response);
+    final response= await Supabase.instance.client.from("Plane").select().eq('id', planeId);
+
     if (response.isEmpty){
       return null;
     }
@@ -35,6 +35,7 @@ class BookingRepository{
           list=list.where((element) => element.status==null).toList();
         }
 
+
         return list;
     
 
@@ -45,6 +46,7 @@ class BookingRepository{
       {"flight_id":flight_id,
       "price":price,
       "seat_location":seatLocation,
+      "status":"not paid",
       "user_id":UuidValue.fromString(Utils.userId).toFormattedString()}
       );
     await Supabase.instance.client.from("Seat").update({"status":"Reserved"}).eq("location", seatLocation).eq("flight_id", flight_id);

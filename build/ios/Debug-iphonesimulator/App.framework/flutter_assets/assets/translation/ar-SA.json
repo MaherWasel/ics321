@@ -32,5 +32,13 @@
     "numOfFir":"عدد مقاعد الدرجه الاولي",
     "planeInfoSc":"صفحة معلومات الطائره",
     "errorTryLater":"حدث ايرور حاول مجددا",
-    "bookingConfirmation":"تاكيد الحجز"
+    "bookingConfirmation":"تاكيد الحجز",
+    "seatLocation": "موقع الكرسي",
+    "status":"الحاله",
+    "pay":"ادفع",
+    "notPaid":"غير مدفوعه",
+    "sr":"ريال",
+    "deleteTicket":"حذف التذكره",
+    "admin":"ادمن",
+    "manage":"ادارة"
 }

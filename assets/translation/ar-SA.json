@@ -39,5 +39,10 @@
     "notPaid":"غير مدفوعه",
     "sr":"ريال",
     "deleteTicket":"حذف التذكره",
-    "admin":"ادمن"
+    "admin":"ادمن",
+    "manage":"ادارة",
+    "cancelled":"ملغاه",
+    "paid":"مدفوعه",
+    "noTicketsFound":"لا يوجد تذاكر"
+
 }

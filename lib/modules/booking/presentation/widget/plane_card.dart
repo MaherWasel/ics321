@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ics321/modules/booking/domain/plane.dart';
+import 'package:ics321/shared/models/plane.dart';
 import 'package:ics321/modules/booking/presentation/provider/provider.dart';
 import 'package:ics321/modules/booking/presentation/widget/plane_icon.dart';
 import 'package:ics321/shared/custom_text.dart';
@@ -9,7 +9,8 @@ import 'package:ics321/shared/custom_text.dart';
 class PlaneCard extends ConsumerWidget{
 
 
-  const PlaneCard({super.key});
+  const PlaneCard({required this.plane,super.key});
+  final Plane plane;
   getFormatedDate(_date) {
       var inputFormat = DateFormat('yyyy-MM-dd HH:mm');
       var inputDate = inputFormat.parse(_date);
@@ -19,7 +20,7 @@ class PlaneCard extends ConsumerWidget{
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final sizes=MediaQuery.of(context).size;
-    final Plane plane =ref.read(bookingStateProvider.notifier).selectedPlane!;
+
     return SizedBox(
       width: double.infinity,
 

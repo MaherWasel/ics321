@@ -13,14 +13,16 @@ class FlightModel {
   final double? economy_price;
   final double? business_price;
   final double? first_price;
+  double? numOfBooked;
   FlightModel( {
-    this.economy_price, this.business_price, this.first_price,
+    required this.economy_price, required this.business_price,required  this.first_price,
     required this.id,
     required this.date,
     required this.source,
     required this.destination,
     required this.time,
     required this.planeId,
+    this.numOfBooked=0.0
 
   });
   // Map<String, dynamic> toJson() {
@@ -40,7 +42,7 @@ class FlightModel {
       id:  map["id"],
       first_price:map["first_price"]*1.0,
       business_price:map["business_price"]*1.0,
-      economy_price:map["economy_price"] *1.0,
+      economy_price:map["economy_price"]*1.0 ,
       date: DateTime.parse(map["date"]),
 
       source: map['source'] ,
@@ -48,6 +50,7 @@ class FlightModel {
       time: DateTime.parse(map["date"]+" "+map['time']),
       
       planeId:map["plane_id"],
+
     );
   }
 

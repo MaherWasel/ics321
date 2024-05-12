@@ -80,6 +80,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "equatable",
+      "rootUri": "file:///Users/maher/.pub-cache/hosted/pub.dev/equatable-2.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///Users/maher/.pub-cache/hosted/pub.dev/fake_async-1.3.1",
       "packageUri": "lib/",
@@ -578,7 +584,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-05T13:22:22.034095Z",
+  "generated": "2024-05-12T12:54:45.451027Z",
   "generator": "pub",
   "generatorVersion": "3.2.0"
 }

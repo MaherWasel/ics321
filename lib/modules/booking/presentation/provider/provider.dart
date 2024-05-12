@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/modules/booking/data/%20booking_repository.dart';
-import 'package:ics321/modules/booking/domain/plane.dart';
+import 'package:ics321/shared/models/plane.dart';
 import 'package:ics321/modules/booking/domain/seat.dart';
 
 abstract class BookingStates{}

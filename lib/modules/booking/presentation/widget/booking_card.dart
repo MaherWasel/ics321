@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/modules/booking/presentation/provider/provider.dart';
-import 'package:ics321/modules/booking/presentation/screen/plane_info.dart';
+import 'package:ics321/shared/plane_info.dart';
 import 'package:ics321/modules/booking/presentation/widget/class_choices.dart';
 import 'package:ics321/shared/custom_button.dart';
 import 'package:ics321/shared/custom_text.dart';
@@ -84,7 +84,7 @@ class BookingCard extends ConsumerWidget{
                      await ref.read(bookingStateProvider.notifier).getPlane(planeId: flight.planeId);
 
                   if (ref.read(bookingStateProvider.notifier).selectedPlane!=null){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PlaneInfoScreen()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PlaneInfoScreen(plane: ref.read(bookingStateProvider.notifier).selectedPlane!,)));
 
                   }
                   }, child: Row(

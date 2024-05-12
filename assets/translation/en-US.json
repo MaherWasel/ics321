@@ -37,5 +37,9 @@
     "notPaid":"Not Paid",
     "sr":"SR",
     "deleteTicket":"Delete The Ticket",
-    "admin":"Admin"
+    "admin":"Admin",
+    "manage":"Manage",
+    "cancelld":"Cancelled",
+    "paid":"Paid",
+    "noTicketsFound":"No Tickets Were Found"
 }

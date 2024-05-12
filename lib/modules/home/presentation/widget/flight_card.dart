@@ -140,7 +140,7 @@ class FlightCardState extends ConsumerState<FlightCard>{
                               pickedDate=await showDatePicker(
                                                   context: context,
                                                    initialDate: DateTime.now(), //get today's date
-                                                  firstDate:DateTime(2024), //DateTime.now() - not to allow to choose before today.
+                                                  firstDate:DateTime.now(), //DateTime.now() - not to allow to choose before today.
                                                   lastDate: DateTime(2025)
                                               );
                               setState(() {

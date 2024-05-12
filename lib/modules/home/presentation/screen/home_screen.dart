@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/core/utils/utils.dart';
+import 'package:ics321/modules/admin/presentation/screen/admin_screen.dart';
 import 'package:ics321/modules/auth/presentation/screens/splash_screen.dart';
 import 'package:ics321/modules/home/presentation/provider/providers.dart';
 import 'package:ics321/modules/home/presentation/widget/bottom_bar.dart';
@@ -75,7 +76,7 @@ class HomeScreen extends ConsumerWidget{
             return const Center(child:  MyTicketsScreen());
           }
           else if (bottomBarIndex==2 && Utils.user!.isAdmin!){
-            return const Text("wd");
+            return Center(child: const AdminScreen());
           }
           else {
             return Center(child: ProfileCard());

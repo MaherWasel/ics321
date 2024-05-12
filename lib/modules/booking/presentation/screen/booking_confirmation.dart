@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ics321/modules/booking/domain/seat.dart';
 import 'package:ics321/modules/booking/presentation/provider/provider.dart';
-import 'package:ics321/modules/booking/presentation/screen/plane_info.dart';
+import 'package:ics321/shared/plane_info.dart';
 import 'package:ics321/modules/booking/presentation/screen/splash_screen.dart';
 import 'package:ics321/shared/custom_button.dart';
 import 'package:ics321/shared/custom_text.dart';
@@ -124,7 +124,7 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
                          await ref.read(bookingStateProvider.notifier).getPlane(planeId: widget.flight.planeId);
             
                       if (ref.read(bookingStateProvider.notifier).selectedPlane!=null){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const PlaneInfoScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PlaneInfoScreen(plane: ref.read(bookingStateProvider.notifier).selectedPlane!,)));
             
                       }
                       }, child: Row(
