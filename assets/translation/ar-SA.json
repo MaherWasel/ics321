@@ -43,6 +43,35 @@
     "manage":"ادارة",
     "cancelled":"ملغاه",
     "paid":"مدفوعه",
-    "noTicketsFound":"لا يوجد تذاكر"
+    "noTicketsFound":"لا يوجد تذاكر",
+    "First":"الاول",
+    "Business":"الاعمال",
+    "Economy":"الاقتصاديه",
+    "selectClassType":"اختر درجة المقعد",
+    "selectedSeat":"المقعد المختار",
+    "reset":"اعادة",
+    "removeCancelled":"حذف الملغاه",
+    "selectDateToGenerateReports":"اختر موعد لصنع التقريرات",
+    "generate":"اصنع",
+    "reportForPlane?":"تقريرات للطائرات ؟ ",
+    "manageWaitLists":"ادارة قائمة الانتظار",
+    "generateReports":"صناعة التقريرات",
+    "noTicketAreBooked":"لا تذاكر لهذي الرحله",
+    "tickedID":"رقم التذكره",
+    "userID":"رقم العميل",
+    "totalTickets":"تذاكر",
+    "numbOfBookedTickets":"عدد التذاكر المحجوزه",
+    "bookedTickets":"تذاكر محجوزه",
+    "numOfFlight":"عدد الرحلات",
+    "loadFactor":"عامل الحموله",
+    "totalPlanes":"عدد الطائرات",
+    "noSeats":"لا يوجد مقاعد متوفره",
+    "waitListRegister":"تسجيل في قائمة الانتظار؟",
+    "yes":"نعم",
+    "no":"لا",
+    "waitList":"قائمة الانتظار",
+    "classType":"نوع الفئه"
+
+
 
 }

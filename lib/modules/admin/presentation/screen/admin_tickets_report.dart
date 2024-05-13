@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ics321/shared/models/ticket.dart';
@@ -12,7 +13,7 @@ class AdminTicketReport extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
-        title: Text(listOfTickets.length.toString()+" Total Tickets"),
+        title: Text("${listOfTickets.length} ${"totalTickets".tr()}"),
       ),
       body:  ListView.builder(
         itemCount: listOfTickets.length,
@@ -24,9 +25,9 @@ class AdminTicketReport extends StatelessWidget{
             children: [
               Row(
                 children: [
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Ticket ID : "),
+                    child: Text("${"ticketID".tr()} : "),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -36,9 +37,9 @@ class AdminTicketReport extends StatelessWidget{
               ),
               Row(
                 children: [
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("User ID : "),
+                    child: Text("${"userID".tr()} : "),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -48,13 +49,13 @@ class AdminTicketReport extends StatelessWidget{
               ),
               Row(
                 children: [
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Status : "),
+                    child: Text("status".tr()),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(listOfTickets[index].status!),
+                    child: Text(listOfTickets[index].status=="Cancelled"?"cancelled".tr():(listOfTickets[index].status=="not paid"?"notPaid".tr():(listOfTickets[index].status=="waitList"?"waitList".tr(): "paid".tr()))),
                   )
                 ],
               )

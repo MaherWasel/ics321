@@ -38,7 +38,7 @@ class ClassChoice extends ConsumerWidget{
           
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: CustomText(type.name,
+            child: CustomText(type.name.tr(),
             color: Theme.of(context).colorScheme.secondary,
             fontsize: 32,),
           ),

@@ -168,7 +168,7 @@ class FlightCardState extends ConsumerState<FlightCard>{
                                   destination=null;
                                   pickedDate=null;
                                 });
-                              }, child: Text("Reset")),
+                              }, child: Text("reset".tr())),
                               CustomButton(child: Text("searchForFlights".tr()), onPressed: (){
                                 final filteredFlights=ref.read(homeControllerProvider.notifier).filterFlights(date: pickedDate,source: selectedSource,destination: destination);
                                 if (filteredFlights.isNotEmpty){

@@ -117,6 +117,7 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
                       padding: const EdgeInsets.all(8.0),
                       child: CustomText(widget.flight.business_price.toString()),
                     ),
+                    CustomText("sr".tr()),
                     const Spacer(),
                     Padding(
                       padding: const EdgeInsets.all(4.0),
@@ -145,9 +146,9 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
                 Row(
                   children: [
                     if (selectedSeat!=null)
-                    const Padding(
+                     Padding(
                       padding: EdgeInsets.all(8.0),
-                      child: CustomText("Selected Seat"),
+                      child: CustomText("selectedSeat".tr()),
                     ),
             
                     Padding(
@@ -213,7 +214,14 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
 
                            }
                           await ref.read(bookingStateProvider.notifier).sendTicket(flight_id: widget.flight.id, price: price, seatLocation: selectedSeat!);
+                          if (ref.read(bookingStateProvider)is BookingFailure){
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User Exceeded 10 tickets for this flight")));
+                            return;
+                          }
+                          else {
                           Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const SuccessBookingScreen()));
+
+                          }
                         })),
                     );
                   }

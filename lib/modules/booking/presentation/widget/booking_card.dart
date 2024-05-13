@@ -28,7 +28,7 @@ class BookingCard extends ConsumerWidget{
   Widget build(BuildContext context,WidgetRef ref) {
     
     final sizes=MediaQuery.of(context).size;
-    final bookingStates=ref.watch(bookingStateProvider);
+
     return Card(
       margin: const EdgeInsets.all(8),
       child: Padding(

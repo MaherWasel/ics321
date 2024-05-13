@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/modules/admin/presentation/provider/provider.dart';
@@ -46,8 +47,8 @@ class ManageBottomSheet extends ConsumerWidget{
                   
                 ),
                 margin: const EdgeInsets.all(8),
-                child: const Center(
-                  child: CustomText("Manage WaitLists"),
+                child:  Center(
+                  child: CustomText("manageWaitLists".tr()),
                 ),
               ),
               InkWell(
@@ -57,7 +58,7 @@ class ManageBottomSheet extends ConsumerWidget{
                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AdminTicketReport(listOfTickets: response)));
                   }
                   else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("No Tickets are Booked for this Flight!")));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("noTicketAreBooked".tr())));
                   }
                 },
                 child: Container(
@@ -78,8 +79,8 @@ class ManageBottomSheet extends ConsumerWidget{
                     
                   ),
                   margin: const EdgeInsets.all(8),
-                  child: const Center(
-                    child: CustomText("Generate Reports"),
+                  child:  Center(
+                    child: CustomText("generateReports".tr()),
                   ),
                 ),
               )

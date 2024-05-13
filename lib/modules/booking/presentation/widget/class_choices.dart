@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/modules/booking/presentation/provider/provider.dart';
@@ -30,7 +31,7 @@ class ClassChoices extends ConsumerWidget{
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const CustomText("Select a Class Type",
+                   CustomText("selectClassType".tr(),
                   fontsize: 32,
                   color: Colors.white,),
                   InkWell(

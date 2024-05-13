@@ -30,7 +30,7 @@ class BookingController extends StateNotifier<BookingStates> {
       state=BookingFailure();
     }
   }
-  Future<List<Seat>?> getAvailableSeats({required String flight_id, String? status,String? type})async{
+  Future<List<Seat>?> getAvailableSeats({required String flight_id, String? status,String? type,})async{
     try{
       state=BookingLoading();
       final respone = await bookingRepository.getAvailableSeats(flight_id: flight_id,type: type,status: status);
@@ -47,13 +47,13 @@ class BookingController extends StateNotifier<BookingStates> {
     }
 
   }
-  Future<void> sendTicket({required String flight_id,required double price,required String seatLocation})async {
+  Future<void> sendTicket({required String flight_id,required double price,required String? seatLocation, String? status})async {
     try{
       state=BookingLoading();
-      await bookingRepository.sendTicket(flight_id: flight_id, price: price, seatLocation: seatLocation);
+      await bookingRepository.sendTicket(flight_id: flight_id, price: price, seatLocation: seatLocation,status: status,classType: selectedType);
       state=BookingSuccess();
 
-;    } 
+   } 
     catch(e){
 
       state=BookingFailure();

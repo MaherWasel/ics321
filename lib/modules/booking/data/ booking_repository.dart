@@ -40,16 +40,32 @@ class BookingRepository{
     
 
   }
-  Future<void> sendTicket({required String flight_id,required double price,required String seatLocation})async {
+  Future<void> sendTicket({required String flight_id,required double price,required String? seatLocation,String? status, required String classType})async {
+    final response = await Supabase.instance.client.from("Ticket").select().not('status', 'eq', 'Cancelled').eq("user_id", UuidValue.fromString(Utils.userId).toFormattedString()).eq("flight_id", flight_id);
+    if (response.length==10){
+      throw Exception();
+    }
+    if (status!=null && status=="waitList"){
+      await Supabase.instance.client.from("Ticket").insert(
+      {"flight_id":flight_id,
+      "price":price,
+      "seat_location":null,
+      "status":"waitList",
+      "class_type":classType,
+      "user_id":UuidValue.fromString(Utils.userId).toFormattedString()}
+      );
+      return;
+    }
 
     await Supabase.instance.client.from("Ticket").insert(
       {"flight_id":flight_id,
       "price":price,
       "seat_location":seatLocation,
       "status":"not paid",
+      "class_type":classType,
       "user_id":UuidValue.fromString(Utils.userId).toFormattedString()}
       );
-    await Supabase.instance.client.from("Seat").update({"status":"Reserved"}).eq("location", seatLocation).eq("flight_id", flight_id);
+    await Supabase.instance.client.from("Seat").update({"status":"Reserved"}).eq("location", seatLocation!).eq("flight_id", flight_id);
   }
 
 }

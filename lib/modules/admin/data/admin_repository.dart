@@ -1,4 +1,4 @@
-import 'package:flutter/scheduler.dart';
+
 import 'package:ics321/shared/models/flight.dart';
 import 'package:ics321/shared/models/plane.dart';
 import 'package:ics321/shared/models/ticket.dart';
@@ -27,14 +27,14 @@ class AdminRepositroy{
       }
     }
     for (int i=0;i<filteredList.length;i++){
-      final response = await Supabase.instance.client.from("Ticket").select().eq("flight_id", filteredList[i].id);
+      final response = await Supabase.instance.client.from("Ticket").select().eq("flight_id", filteredList[i].id).not("status", 'eq', 'Cancelled').not("status", 'eq', 'waitList');
       filteredList[i].numOfBooked=response.length*1.0;
     }
     return filteredList;
   }
   Future<Plane?> getPlane({required String planeId})async {
     final response= await Supabase.instance.client.from("Plane").select().eq('id', planeId);
-    print(response);
+
     if (response.isEmpty){
       return null;
     }

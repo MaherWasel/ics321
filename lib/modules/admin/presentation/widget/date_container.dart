@@ -41,7 +41,7 @@ class _DateContainerState extends ConsumerState<DateContainer> {
         child: 
         Column(
           children: [
-            CustomText("SelectDate to get General Reports",
+            CustomText("selectDateToGenerateReports".tr(),
             color: Theme.of(context).colorScheme.primary,),
             Row(
               children: [
@@ -61,7 +61,7 @@ class _DateContainerState extends ConsumerState<DateContainer> {
             if (selectedDate!=null)
             ListTile(
       leading: const Icon(FontAwesomeIcons.plane),
-      title: const Text('Reports For Planes?'),
+      title:  Text('reportForPlane?'.tr()),
       trailing: Icon(forPlane?Icons.radio_button_checked:(Icons.radio_button_off)),
       onTap: (){
         setState(() {
@@ -100,7 +100,7 @@ class _DateContainerState extends ConsumerState<DateContainer> {
                       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AdminDateReport(listOfFligts: response)));
                     }
 
-                  }, child: const Text("Generate")),
+                  }, child:  Text("generate".tr())),
                 );
               }
             )

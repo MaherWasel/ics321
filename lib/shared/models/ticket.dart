@@ -10,6 +10,7 @@ class Ticket {
   final String? status;
   final String? seat_location;
   final String? user_id;
-  Ticket({required this.id, this.flight, this.price, this.status, this.seat_location, this.user_id});
+  final String? class_type;
+  Ticket( {required this.id, this.flight, this.class_type,this.price, this.status, this.seat_location, this.user_id});
 
 }

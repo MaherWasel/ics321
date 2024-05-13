@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ics321/core/utils/utils.dart';
+import 'package:ics321/modules/my_tickets/presentation/widget/seats_picker.dart';
 import 'package:ics321/shared/models/ticket.dart';
 import 'package:ics321/modules/my_tickets/presentation/provider/provider.dart';
 import 'package:ics321/modules/my_tickets/presentation/widget/ticket_cancelation.dart';
@@ -29,7 +30,8 @@ class TicketCard extends ConsumerWidget{
     }
   @override
   Widget build(BuildContext context,WidgetRef ref) {
-  final paymentState= ref.watch(myTicketPaymentProvider);
+  final ticketStates= ref.watch(myTicketsProvider);
+
    return Card(
       margin: const EdgeInsets.all(8),
       child: Padding(
@@ -144,9 +146,17 @@ class TicketCard extends ConsumerWidget{
                 const SizedBox(
                   width: 10,
                 ),
-                CustomText(ticket.status??("notPaid".tr())),
+                CustomText(ticket.status=="Cancelled"?"cancelled".tr():(ticket.status=="not paid"?"notPaid".tr():(ticket.status=="waitList"?"waitList".tr(): "paid".tr()))),
                 const SizedBox(
                   width: 20,
+                )
+              ],
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("${'classType'.tr()} : ${ticket.class_type!.tr()}"),
                 )
               ],
             ),
@@ -176,7 +186,7 @@ class TicketCard extends ConsumerWidget{
                         ),
                         child: Builder(
                           builder: (context) {
-                             if (paymentState is TicketLoading){
+                             if (ticketStates is TicketLoading){
                         return const Center(
                           child: const CircularProgressIndicator(),
                         );
@@ -203,7 +213,14 @@ class TicketCard extends ConsumerWidget{
                                                         
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(30),
-                                      color: Colors.white
+                                      color: Colors.white,
+                                      boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),]
                                     ),
                                     child: const Center(
                                       child: Row(
@@ -233,7 +250,14 @@ class TicketCard extends ConsumerWidget{
                                                         
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(30),
-                                      color: Colors.white
+                                      color: Colors.white,
+                                      boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),]
                                     ),
                                     child: const Center(
                                       child: Row(
@@ -261,6 +285,33 @@ class TicketCard extends ConsumerWidget{
                   ));
                 }),
             )
+            else if (ticket.status=="waitList")
+            Builder(
+              builder: (context) {
+                if (ticketStates is TicketLoading){
+                  return Center(child: CircularProgressIndicator());
+                }
+                return SizedBox(
+                  width: 300,
+                  child: CustomButton(child: Text("waitList".tr()), onPressed: ()async {
+                    final response = await ref.read(myTicketsProvider.notifier).getAvailableSeats(flight_id: ticket.flight!.id,class_type: ticket.class_type!);
+                    if (response==null ||response.isEmpty){
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("noSeats".tr())));
+                      return;
+                    }
+                    else {
+                      showDialog(context: context, builder: (context)=>Dialog(
+                        clipBehavior: Clip.hardEdge,
+                        child: Material(child: SizedBox(
+                          height: 150,
+                          
+                          child: SeatPicker(listOfSeats: response,ticket: ticket,refresh))),
+                      ));
+                    }
+                  }),
+                );
+              }
+            )
             else 
             Container(
               width:300,
@@ -273,7 +324,7 @@ class TicketCard extends ConsumerWidget{
                 borderRadius: BorderRadius.circular(100)
               
               ),
-              child: Center(child:  CustomText(ticket.status!,
+              child: Center(child:  CustomText(ticket.status=="Cancelled"?"cancelled".tr():(ticket.status=="not paid"?"notPaid".tr():(ticket.status=="waitList"?"waitList".tr(): "paid".tr())),
               color: Theme.of(context).colorScheme.primary,)),
             )
             

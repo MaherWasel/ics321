@@ -1,5 +1,6 @@
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ics321/modules/booking/domain/seat.dart';
 import 'package:ics321/modules/my_tickets/data/ticket_repository.dart';
 import 'package:ics321/shared/models/ticket.dart';
 import 'package:ics321/shared/models/plane.dart';
@@ -50,6 +51,41 @@ class TicketController extends StateNotifier<TicketsStates> {
       print(e);
       state=TicketFailure();
     }
+  }
+  Future<List<Seat>?> getAvailableSeats({required String flight_id, String? status,String? type,required  String class_type})async{
+    try{
+      state=TicketLoading();
+      final respone = await ticketRepository.getAvailableSeats(flight_id: flight_id,type: type,status: status,class_type: class_type);
+      state=TicketSuccess();
+
+      return respone;
+    } 
+    catch(e){
+      print(e);
+      state=TicketFailure();
+
+      
+
+    }
+
+  }
+  
+  Future<void> changeWaitList({required Ticket ticketId ,required String seatLocation})async {
+    try{
+      state=TicketLoading();
+        await ticketRepository.changeWaitList(ticketId: ticketId,seatLocation: seatLocation);
+      state=TicketSuccess();
+
+
+    } 
+    catch(e){
+      print(e);
+      state=TicketFailure();
+
+      
+
+    }
+
   }
   Future<void> cancelTicket({required Ticket ticket})async {
     try{

@@ -1,3 +1,4 @@
+import 'package:ics321/modules/booking/domain/seat.dart';
 import 'package:ics321/shared/models/ticket.dart';
 import 'package:ics321/shared/models/flight.dart';
 import 'package:ics321/shared/models/plane.dart';
@@ -18,11 +19,43 @@ class TicketRepository{
         price: response[i]["price"]*1.0,
         status: response[i]["status"],
         seat_location: response[i]["seat_location"],
-        user_id: response[i]["user_id"]
+        user_id: response[i]["user_id"],
+        class_type: response[i]["class_type"]
         ));
     }
 
     return list;
+  }
+  Future<List<Seat>> getAvailableSeats({required String flight_id, String? status,String? type,required String class_type})async{
+    final response = await Supabase.instance.client.from("Seat").select().
+    filter("flight_id", 'eq', flight_id,).eq("type", class_type);
+        List<Seat> list=[];
+        for (int i=0;i<response.length;i++){
+
+            list.add(Seat.fromMap(response[i]));
+    } 
+        if (type !=null){
+          list=list.where((element) => element.type==type).toList();
+        }
+         if (status !=null){
+          list=list.where((element) => element.status==status).toList();
+        }
+         if (type !=null && status!=null){
+          list=list.where((element) => element.type==type&&element.status==status).toList();
+
+        }
+         if (status==null){
+          list=list.where((element) => element.status==null).toList();
+        }
+
+
+        return list;
+    
+
+  }
+  Future<void> changeWaitList({required Ticket ticketId ,required String seatLocation})async {
+    await Supabase.instance.client.from("Ticket").update({"status":"not paid","seat_location":seatLocation}).eq("id", ticketId.id);
+    await Supabase.instance.client.from("Seat").update({"status":"Reserved"}).eq("flight_id", ticketId.flight!.id).eq("location", seatLocation);
   }
   Future<void> cancelTicket({required Ticket ticket})async{
     await Supabase.instance.client.from("Ticket").update({"status":"Cancelled"}).eq("flight_id", ticket.flight!.id).eq('user_id', ticket.user_id!).eq("seat_location", ticket.seat_location!);

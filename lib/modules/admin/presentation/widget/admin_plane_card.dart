@@ -24,7 +24,7 @@ class AdminPlaneCard extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
-        title: Text("${listOfPlanes.length} Total Planes"),
+        title: Text("${listOfPlanes.length} ${"totalPlanes".tr()}"),
       ),
       body: ListView.builder(
         shrinkWrap: true,
@@ -52,9 +52,9 @@ class AdminPlaneCard extends StatelessWidget{
                     padding: EdgeInsets.all(8.0),
                     child: Icon(Icons.calendar_month),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Previes Maintanance"),
+                    child: Text("prev_maintanance".tr()),
                   ),
                   const Spacer(),
                   Padding(
@@ -69,9 +69,9 @@ class AdminPlaneCard extends StatelessWidget{
                     padding: EdgeInsets.all(8.0),
                     child: Icon(Icons.calendar_month),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Next Maintanance"),
+                    child: Text("next_maintanance".tr()),
                   ),
                   const Spacer(),
                   Padding(
@@ -86,9 +86,9 @@ class AdminPlaneCard extends StatelessWidget{
                     padding: EdgeInsets.all(8.0),
                     child: Icon(FontAwesomeIcons.businessTime),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Maximum Business Seats"),
+                    child: Text("numOfBus".tr()),
                   ),
                   const Spacer(),
                   Padding(
@@ -103,9 +103,9 @@ class AdminPlaneCard extends StatelessWidget{
                     padding: EdgeInsets.all(8.0),
                     child: Icon(FontAwesomeIcons.award),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Maximum Business Seats"),
+                    child: Text("numOfFir".tr()),
                   ),
                   const Spacer(),
                   Padding(
@@ -120,9 +120,9 @@ class AdminPlaneCard extends StatelessWidget{
                     padding: EdgeInsets.all(8.0),
                     child: Icon(FontAwesomeIcons.star),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Maximum Economy Seats"),
+                    child: Text("numOfEco".tr()),
                   ),
                   const Spacer(),
                   Padding(
@@ -137,9 +137,9 @@ class AdminPlaneCard extends StatelessWidget{
                     padding: EdgeInsets.all(8.0),
                     child: Icon(Icons.flight),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Number Of Flights"),
+                    child: Text("numOfFlight".tr()),
                   ),
                   const Spacer(),
                   Padding(
@@ -154,9 +154,9 @@ class AdminPlaneCard extends StatelessWidget{
                     padding: EdgeInsets.all(8.0),
                     child: Icon(Icons.airplane_ticket),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Number Of Reserved Tickets"),
+                    child: Text("numbOfBookedTickets".tr()),
                   ),
                   const Spacer(),
                   Padding(
@@ -171,9 +171,9 @@ class AdminPlaneCard extends StatelessWidget{
                     padding: EdgeInsets.all(8.0),
                     child: Icon(Icons.calculate),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Average Load Factor"),
+                    child: Text("loadFactor".tr()),
                   ),
                   const Spacer(),
                   Padding(

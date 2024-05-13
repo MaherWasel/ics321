@@ -28,7 +28,7 @@ class AdminDateReport extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
-        title:Text(totalNumOfBooks.toString()+" Booked Tickets"),
+        title:Text(totalNumOfBooks.toString()+" ${"bookedTickets".tr()}"),
       ),
       body: ListView.builder(
         shrinkWrap: true,
@@ -84,7 +84,7 @@ class AdminDateReport extends StatelessWidget{
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("number of booked tickets"),
+                      child: Text("numbOfBookedTickets".tr()),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
