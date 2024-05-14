@@ -95,7 +95,7 @@ class BookingCard extends ConsumerWidget{
                       ),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: Text("planeInfo".tr()),
+                        child: Text("planeInfo".tr(),),
                       )
                     ],
                   )),

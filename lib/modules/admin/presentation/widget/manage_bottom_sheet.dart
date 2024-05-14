@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/modules/admin/presentation/provider/provider.dart';
 import 'package:ics321/modules/admin/presentation/screen/admin_tickets_report.dart';
+import 'package:ics321/modules/admin/presentation/screen/admin_wait_list.dart';
 import 'package:ics321/shared/custom_text.dart';
 import 'package:ics321/shared/models/flight.dart';
 
@@ -29,26 +30,39 @@ class ManageBottomSheet extends ConsumerWidget{
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 50,
-                width: double.infinity,
-          
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(50),
-                  boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-              ],
-                  
-                ),
-                margin: const EdgeInsets.all(8),
-                child:  Center(
-                  child: CustomText("manageWaitLists".tr()),
+              InkWell(
+                onTap: ()async{
+                  final response = await ref.read(adminControllerProvider.notifier).getWaitListedTickets(flight: fligth);
+                  if (response==null||response.isEmpty){
+                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('No WaitListed Tickets found for this flight')));
+
+                    return;
+                  }
+                  else {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AdminWaitListScreen(listOfWaitListsTickets: response)));
+                  }
+                },
+                child: Container(
+                  height: 50,
+                  width: double.infinity,
+                          
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                ],
+                    
+                  ),
+                  margin: const EdgeInsets.all(8),
+                  child:  Center(
+                    child: CustomText("manageWaitLists".tr()),
+                  ),
                 ),
               ),
               InkWell(

@@ -62,7 +62,7 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: CustomText(widget.flight.source,
-                      fontsize: 20,),
+                      fontsize: 16,),
                     ),
                     const Spacer(),
                     const Padding(
@@ -71,7 +71,7 @@ class _BookingConfirmationState extends ConsumerState<BookingConfirmation> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: CustomText(widget.flight.destination,fontsize: 20,),
+                      child: CustomText(widget.flight.destination,fontsize: 16,),
                     )
                   ],
                 ),

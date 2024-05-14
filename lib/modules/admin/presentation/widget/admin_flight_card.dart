@@ -9,7 +9,7 @@ import 'package:ics321/shared/models/flight.dart';
 import 'package:ics321/shared/plane_info.dart';
 
 class AdminFlightCard extends ConsumerWidget{
-   AdminFlightCard({super.key, required this.flight});
+   const AdminFlightCard({super.key, required this.flight});
   final FlightModel flight;
    getFormatedDate(DateTime _date, bool time) {
 
