@@ -25,8 +25,10 @@ class HomeScreen extends ConsumerWidget{
             actions: [
               TextButton(onPressed: (){
                 FirebaseAuth.instance.signOut();
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const SplashScreen()));
                 Utils.user=null;
+                Utils.userId="";
+                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const SplashScreen()));
+                
                 
               }, child: Row(
                 children: [

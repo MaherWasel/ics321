@@ -22,7 +22,7 @@ class LoginScreen extends ConsumerWidget{
     return Builder(
 
       builder: (context) {
-        if (authState is AuthSucess){
+        if (authState is AuthSucess && Utils.userId.isNotEmpty){
           // Utils.userId=UuidValue.fromString(snapshot.data?.uid??"").toFormattedString();
           // would be changed when we do the home page
 

@@ -69,5 +69,7 @@
     "yes":"Yes",
     "no":"No",
     "waitList":"WaitList",
-    "cancelled":"Cancelled"
+    "cancelled":"Cancelled",
+    "classType":"Class Type"
+
 }
