@@ -10,10 +10,11 @@ import 'package:ics321/modules/home/presentation/screen/home_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
-void main() async{
-    await Supabase.initialize(
+void main() async {
+  await Supabase.initialize(
     url: 'https://vlnrnqnzdsmjtpxhvivi.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsbnJucW56ZHNtanRweGh2aXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ3MTgxNzcsImV4cCI6MjAzMDI5NDE3N30.Xb27CtuPD31ihBhs4-otSgtc6Ed_r4CgHFLV0I70B4I',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZsbnJucW56ZHNtanRweGh2aXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ3MTgxNzcsImV4cCI6MjAzMDI5NDE3N30.Xb27CtuPD31ihBhs4-otSgtc6Ed_r4CgHFLV0I70B4I',
   );
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -22,19 +23,11 @@ void main() async{
   await EasyLocalization.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
 
-
-
-
   runApp(EasyLocalization(
-      startLocale:
-          const Locale('ar', 'SA'),
-      supportedLocales: const [
-        Locale('ar', 'SA'),
-        Locale('en', 'US')
-      ],
-     
-      path: 'assets/translation', 
-      child: const ProviderScope(child: MyApp()))); 
+      startLocale: const Locale('ar', 'SA'),
+      supportedLocales: const [Locale('ar', 'SA'), Locale('en', 'US')],
+      path: 'assets/translation',
+      child: const ProviderScope(child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {
@@ -46,11 +39,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: lightTheme,
-
-      locale: context.locale, 
-      localizationsDelegates:
-      context.localizationDelegates,
-      supportedLocales: context.supportedLocales, 
+      locale: context.locale,
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
     );
@@ -137,9 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          
-        },
+        onPressed: () {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
