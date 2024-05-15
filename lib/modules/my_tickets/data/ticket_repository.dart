@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:ics321/constants/email_const.dart';
 import 'package:ics321/core/utils/utils.dart';
 import 'package:ics321/modules/booking/domain/seat.dart';
@@ -23,7 +24,9 @@ class TicketRepository {
       List<dynamic> data = res as List<dynamic>;
 
       final recmail = data[0]["email"];
-
+      if (recmail == null) {
+        return false;
+      }
       print(recmail);
       print('The user email is: $recmail');
       final smtpServer = gmail(EmailConstants.email, EmailConstants.password);
@@ -42,9 +45,9 @@ class TicketRepository {
           //     ..cid = '<myimg@3.141>'
           // ]
           ;
-      print(1);
+
       final sendReport = await send(message, smtpServer);
-      print(2);
+
       print('Message sent: ' + sendReport.toString());
 
       return true;
@@ -115,7 +118,7 @@ class TicketRepository {
     return list;
   }
 
-  Future<void> changeWaitList(
+  Future<bool?> changeWaitList(
       {required Ticket ticketId, required String seatLocation}) async {
     await Supabase.instance.client
         .from("Ticket")
@@ -126,13 +129,15 @@ class TicketRepository {
         .update({"status": "Reserved"})
         .eq("flight_id", ticketId.flight!.id)
         .eq("location", seatLocation);
-    await sendConfirmation(
+    final res_email = await sendConfirmation(
         body:
             'The Ticket with the following ID ${ticketId.id} has been promoted from waitlisting.',
         subject: "Ticket WaitListed Promoted.");
+
+    return res_email;
   }
 
-  Future<void> cancelTicket({required Ticket ticket}) async {
+  Future<bool?> cancelTicket({required Ticket ticket}) async {
     await Supabase.instance.client
         .from("Ticket")
         .update({"status": "Cancelled"})
@@ -153,9 +158,11 @@ class TicketRepository {
         "ticket_id": ticket.id
       });
     }
-    await sendConfirmation(
+    final res_em = await sendConfirmation(
         body: 'The Ticket with the following ID ${ticket.id} has been cancled.',
         subject: "Ticket Cancilation.");
+
+    return res_em;
   }
 
   Future<Plane?> getPlane({required String planeId}) async {
@@ -168,7 +175,7 @@ class TicketRepository {
     return Plane.fromMap(response[0]);
   }
 
-  Future<void> payTicket(
+  Future<bool?> payTicket(
       {required Ticket ticketId, required String user_id}) async {
     await Supabase.instance.client
         .from("Ticket")
@@ -182,8 +189,10 @@ class TicketRepository {
       "amount": ticketId.price,
       "ticket_id": ticketId.id
     });
-    await sendConfirmation(
+    final res = await sendConfirmation(
         body: 'The Ticket with the following ID ${ticketId.id} has been paid.',
         subject: "Ticket Payment.");
+
+    return res;
   }
 }

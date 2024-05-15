@@ -23,6 +23,10 @@ class BookingRepository {
 
       final recmail = data[0]["email"];
 
+      if (recmail == null) {
+        return false;
+      }
+
       print(recmail);
       print('The user email is: $recmail');
       final smtpServer = gmail(EmailConstants.email, EmailConstants.password);
@@ -93,7 +97,7 @@ class BookingRepository {
     return list;
   }
 
-  Future<void> sendTicket(
+  Future<bool?> sendTicket(
       {required String flight_id,
       required double price,
       required String? seatLocation,
@@ -117,7 +121,7 @@ class BookingRepository {
         "class_type": classType,
         "user_id": UuidValue.fromString(Utils.userId).toFormattedString()
       });
-      return;
+      return null;
     }
 
     await Supabase.instance.client.from("Ticket").insert({
@@ -138,6 +142,8 @@ class BookingRepository {
         body:
             'You have reservation in $seatLocation and with flightId $flight_id',
         subject: "Booking Flight");
+
+    return sentEmail;
 
     print(sentEmail);
   }

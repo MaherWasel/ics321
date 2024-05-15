@@ -13,54 +13,55 @@ import 'package:ics321/shared/plane_info.dart';
 
 import 'package:uuid/uuid_value.dart';
 
-class TicketCard extends ConsumerWidget{
+class TicketCard extends ConsumerWidget {
   final Ticket ticket;
   final Function refresh;
-  const TicketCard( {super.key,required this.refresh, required this.ticket});
+  const TicketCard({super.key, required this.refresh, required this.ticket});
   getFormatedDate(DateTime _date, bool time) {
-
-    if (time){
-    return DateFormat.jms().format(_date);
-     
-
+    if (time) {
+      return DateFormat.jms().format(_date);
     }
     var outputFormat = DateFormat('dd/MM/yyyy');
     return outputFormat.format(_date);
+  }
 
-    }
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
-  final ticketStates= ref.watch(myTicketsProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ticketStates = ref.watch(myTicketsProvider);
 
-   return Card(
+    return Card(
       margin: const EdgeInsets.all(8),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            if (ticket.status!="Cancelled")
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 4.0,
-                  vertical: 2),
-                  child: TextButton(
-                    onPressed: (){
-                      showDialog(context: context, builder: (context)=> Center(child: TicketCancelation(ticket,()=>refresh())));
-                    },
-                    child:  Row(
-                      children: [
-                        CustomText("deleteTicket".tr()),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4.0),
-                          child: Icon(Icons.delete),
-                        ),
-                      ],
-                    )),
-                )
-              ],
-            ),
+            if (ticket.status != "Cancelled")
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0, vertical: 2),
+                    child: TextButton(
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) => Center(
+                                  child: TicketCancelation(
+                                      ticket, () => refresh())));
+                        },
+                        child: Row(
+                          children: [
+                            CustomText("deleteTicket".tr()),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 4.0),
+                              child: Icon(Icons.delete),
+                            ),
+                          ],
+                        )),
+                  )
+                ],
+              ),
             Row(
               children: [
                 const Padding(
@@ -93,7 +94,7 @@ class TicketCard extends ConsumerWidget{
                 ),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
-                  child: Text(getFormatedDate(ticket.flight!.date,false)),
+                  child: Text(getFormatedDate(ticket.flight!.date, false)),
                 ),
                 const Padding(
                   padding: EdgeInsets.all(4.0),
@@ -106,26 +107,31 @@ class TicketCard extends ConsumerWidget{
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(4.0),
-                  child: TextButton(onPressed: ()async{
-                    final response =await ref.read(myTicketsProvider.notifier).getPlane(planeId: ticket.flight!.planeId);
+                  child: TextButton(
+                      onPressed: () async {
+                        final response = await ref
+                            .read(myTicketsProvider.notifier)
+                            .getPlane(planeId: ticket.flight!.planeId);
 
-                  if (response!=null){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PlaneInfoScreen(plane: response,)));
-
-                  }
-           
-                  }, child: Row(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(4.0),
-                        child: Icon(Icons.info),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Text("planeInfo".tr()),
-                      )
-                    ],
-                  )),
+                        if (response != null) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => PlaneInfoScreen(
+                                    plane: response,
+                                  )));
+                        }
+                      },
+                      child: Row(
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(4.0),
+                            child: Icon(Icons.info),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text("planeInfo".tr()),
+                          )
+                        ],
+                      )),
                 )
               ],
             ),
@@ -133,7 +139,9 @@ class TicketCard extends ConsumerWidget{
               children: [
                 const Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Icon(FontAwesomeIcons.moneyCheckDollar,),
+                  child: Icon(
+                    FontAwesomeIcons.moneyCheckDollar,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -141,12 +149,17 @@ class TicketCard extends ConsumerWidget{
                 ),
                 CustomText("sr".tr()),
                 const Spacer(),
-
                 CustomText("status".tr()),
                 const SizedBox(
                   width: 10,
                 ),
-                CustomText(ticket.status=="Cancelled"?"cancelled".tr():(ticket.status=="not paid"?"notPaid".tr():(ticket.status=="waitList"?"waitList".tr(): "paid".tr()))),
+                CustomText(ticket.status == "Cancelled"
+                    ? "cancelled".tr()
+                    : (ticket.status == "not paid"
+                        ? "notPaid".tr()
+                        : (ticket.status == "waitList"
+                            ? "waitList".tr()
+                            : "paid".tr()))),
                 const SizedBox(
                   width: 20,
                 )
@@ -156,7 +169,8 @@ class TicketCard extends ConsumerWidget{
               children: [
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("${'classType'.tr()} : ${ticket.class_type!.tr()}"),
+                  child:
+                      Text("${'classType'.tr()} : ${ticket.class_type!.tr()}"),
                 )
               ],
             ),
@@ -168,171 +182,216 @@ class TicketCard extends ConsumerWidget{
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: CustomText(ticket.seat_location??""),
+                  child: CustomText(ticket.seat_location ?? ""),
                 )
               ],
             ),
-            if (ticket.status=="not paid")
-            SizedBox(
-              width:300,
-              child: CustomButton(
-                child: CustomText("pay".tr()), onPressed: () {
-                  showBottomSheet(context: context, builder: (context)=>Container(
-                        width: double.infinity,
-                        height: 300,
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primary,
-                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30))
-                        ),
-                        child: Builder(
-                          builder: (context) {
-                             if (ticketStates is TicketLoading){
-                        return const Center(
-                          child: const CircularProgressIndicator(),
-                        );
-                      }
-                     
-                            return Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: CustomText("Pay With:",fontsize: 32,
-                                  color: Colors.white,),
-                                ),
-                                InkWell(
-                                  onTap: ()async {
-                                    await ref.read(myTicketPaymentProvider.notifier).payTicket(ticket: ticket, user_id: UuidValue.fromString(Utils.userId).toFormattedString());
-                                    Navigator.pop(context);
-                                    refresh();
-                                    
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.all(8),
-                                    height: 60,
-                                                        
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: Colors.white,
-                                      boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),]
-                                    ),
-                                    child: const Center(
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Icon(Icons.credit_card),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: CustomText("With credit card"),
-                                          )],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: ()async{
-                                    await ref.read(myTicketPaymentProvider.notifier).payTicket(ticket: ticket, user_id: UuidValue.fromString(Utils.userId).toFormattedString());
-                                    Navigator.pop(context);
-                                    refresh();
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.all(8),
-                                    height: 60,
-                                                        
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: Colors.white,
-                                      boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),]
-                                    ),
-                                    child: const Center(
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: Icon(FontAwesomeIcons.applePay,size: 36,),
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: CustomText("With Apple Pay"),
-                                          )],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          }
-                        ),
-                          
+            if (ticket.status == "not paid")
+              SizedBox(
+                width: 300,
+                child: CustomButton(
+                    child: CustomText("pay".tr()),
+                    onPressed: () {
+                      showBottomSheet(
+                          context: context,
+                          builder: (context) => Container(
+                                width: double.infinity,
+                                height: 300,
+                                decoration: BoxDecoration(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(30),
+                                        topRight: Radius.circular(30))),
+                                child: Builder(builder: (context) {
+                                  if (ticketStates is TicketLoading) {
+                                    return const Center(
+                                      child: const CircularProgressIndicator(),
+                                    );
+                                  }
 
-                    
-                  ));
-                }),
-            )
-            else if (ticket.status=="waitList")
-            Builder(
-              builder: (context) {
-                if (ticketStates is TicketLoading){
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: CustomText(
+                                          "Pay With:",
+                                          fontsize: 32,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          await ref
+                                              .read(myTicketPaymentProvider
+                                                  .notifier)
+                                              .payTicket(
+                                                  ticket: ticket,
+                                                  user_id: UuidValue.fromString(
+                                                          Utils.userId)
+                                                      .toFormattedString(),
+                                                  context: context);
+                                          Navigator.pop(context);
+                                          refresh();
+                                        },
+                                        child: Container(
+                                          margin: const EdgeInsets.all(8),
+                                          height: 60,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 5,
+                                                  blurRadius: 7,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ]),
+                                          child: const Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child:
+                                                      Icon(Icons.credit_card),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: CustomText(
+                                                      "With credit card"),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () async {
+                                          await ref
+                                              .read(myTicketPaymentProvider
+                                                  .notifier)
+                                              .payTicket(
+                                                  ticket: ticket,
+                                                  user_id: UuidValue.fromString(
+                                                          Utils.userId)
+                                                      .toFormattedString(),
+                                                  context: context);
+                                          Navigator.pop(context);
+                                          refresh();
+                                        },
+                                        child: Container(
+                                          margin: const EdgeInsets.all(8),
+                                          height: 60,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 5,
+                                                  blurRadius: 7,
+                                                  offset: Offset(0,
+                                                      3), // changes position of shadow
+                                                ),
+                                              ]),
+                                          child: const Center(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Icon(
+                                                    FontAwesomeIcons.applePay,
+                                                    size: 36,
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: CustomText(
+                                                      "With Apple Pay"),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                }),
+                              ));
+                    }),
+              )
+            else if (ticket.status == "waitList")
+              Builder(builder: (context) {
+                if (ticketStates is TicketLoading) {
                   return Center(child: CircularProgressIndicator());
                 }
                 return SizedBox(
                   width: 300,
-                  child: CustomButton(child: Text("waitList".tr()), onPressed: ()async {
-                    final response = await ref.read(myTicketsProvider.notifier).getAvailableSeats(flight_id: ticket.flight!.id,class_type: ticket.class_type!);
-                    if (response==null ||response.isEmpty){
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("noSeats".tr())));
-                      return;
-                    }
-                    else {
-                      showDialog(context: context, builder: (context)=>Dialog(
-                        clipBehavior: Clip.hardEdge,
-                        child: Material(child: SizedBox(
-                          height: 150,
-                          
-                          child: SeatPicker(listOfSeats: response,ticket: ticket,refresh))),
-                      ));
-                    }
-                  }),
+                  child: CustomButton(
+                      child: Text("waitList".tr()),
+                      onPressed: () async {
+                        final response = await ref
+                            .read(myTicketsProvider.notifier)
+                            .getAvailableSeats(
+                                flight_id: ticket.flight!.id,
+                                class_type: ticket.class_type!);
+                        if (response == null || response.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("noSeats".tr())));
+                          return;
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) => Dialog(
+                                    clipBehavior: Clip.hardEdge,
+                                    child: Material(
+                                        child: SizedBox(
+                                            height: 150,
+                                            child: SeatPicker(
+                                                listOfSeats: response,
+                                                ticket: ticket,
+                                                refresh))),
+                                  ));
+                        }
+                      }),
                 );
-              }
-            )
-            else 
-            Container(
-              width:300,
-              height: 45,
-              decoration: BoxDecoration(
-                border: Border.all(
+              })
+            else
+              Container(
+                width: 300,
+                height: 45,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(100)),
+                child: Center(
+                    child: CustomText(
+                  ticket.status == "Cancelled"
+                      ? "cancelled".tr()
+                      : (ticket.status == "not paid"
+                          ? "notPaid".tr()
+                          : (ticket.status == "waitList"
+                              ? "waitList".tr()
+                              : "paid".tr())),
                   color: Theme.of(context).colorScheme.primary,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.circular(100)
-              
-              ),
-              child: Center(child:  CustomText(ticket.status=="Cancelled"?"cancelled".tr():(ticket.status=="not paid"?"notPaid".tr():(ticket.status=="waitList"?"waitList".tr(): "paid".tr())),
-              color: Theme.of(context).colorScheme.primary,)),
-            )
-            
-
+                )),
+              )
           ],
         ),
       ),
     );
   }
-
 }
