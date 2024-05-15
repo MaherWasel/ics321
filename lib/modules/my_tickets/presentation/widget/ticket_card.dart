@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ics321/core/utils/utils.dart';
+import 'package:ics321/modules/home/presentation/widget/flight_card.dart';
 import 'package:ics321/modules/my_tickets/presentation/widget/seats_picker.dart';
 import 'package:ics321/shared/models/ticket.dart';
 import 'package:ics321/modules/my_tickets/presentation/provider/provider.dart';
@@ -52,11 +53,12 @@ class TicketCard extends ConsumerWidget {
                         },
                         child: Row(
                           children: [
-                            CustomText("deleteTicket".tr()),
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 4.0),
                               child: Icon(Icons.delete),
                             ),
+                            CustomText("cancelTicket".tr()),
+                            
                           ],
                         )),
                   )
@@ -153,6 +155,11 @@ class TicketCard extends ConsumerWidget {
                 const SizedBox(
                   width: 10,
                 ),
+                if (ticket.status=="Expired")
+                CustomText('expired'.trim())
+                else if (ticket.status=="Reusable")
+                CustomText('reusable'.trim())
+                else
                 CustomText(ticket.status == "Cancelled"
                     ? "cancelled".tr()
                     : (ticket.status == "not paid"
@@ -367,6 +374,48 @@ class TicketCard extends ConsumerWidget {
                       }),
                 );
               })
+            else if (ticket.status=="Expired")
+            Container(
+                width: 300,
+                height: 45,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 2,
+                    ),
+                    borderRadius: BorderRadius.circular(100)),
+                child: Center(
+                    child: CustomText(
+                  "expired".tr(),
+                  color: Theme.of(context).colorScheme.primary,
+                )),
+              )
+            else if (ticket.status=="Reusable")
+            InkWell(
+              onTap: (){
+                Utils.reusableTicket=ticket;
+                showDialog(context: context, builder: (context)=>Dialog(
+                  child: SizedBox(
+                    height: 350, 
+                    child: FlightCard()),
+                ));
+              },
+              child: Container(
+                  width: 300,
+                  height: 45,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(100)),
+                  child: Center(
+                      child: CustomText(
+                    "reSchedule".tr(),
+                    color: Theme.of(context).colorScheme.primary,
+                  )),
+                ),
+            )
             else
               Container(
                 width: 300,

@@ -37,26 +37,11 @@ class TicketCancelation extends ConsumerWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: CustomText("penalty for ***"),
+                  child: CustomText("10% fine will be detected from price")
                 ),
               ],
             ),
-            const Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: CustomText("penalty for ***"),
-                ),
-              ],
-            ),
-            const Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: CustomText("penalty for ***"),
-                ),
-              ],
-            ),
+            
             const Spacer(),
             Padding(
               padding: const EdgeInsets.all(8.0),

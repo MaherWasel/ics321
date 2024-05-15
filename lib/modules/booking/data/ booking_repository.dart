@@ -109,6 +109,9 @@ class BookingRepository {
         .not('status', 'eq', 'Cancelled')
         .eq("user_id", UuidValue.fromString(Utils.userId).toFormattedString())
         .eq("flight_id", flight_id);
+    if (Utils.reusableTicket!=null){
+      await Supabase.instance.client.from("Ticket").delete().eq("id", Utils.reusableTicket!.id);
+    }
     if (response.length == 10) {
       throw Exception();
     }
@@ -123,6 +126,8 @@ class BookingRepository {
       });
       return null;
     }
+    
+   
 
     await Supabase.instance.client.from("Ticket").insert({
       "flight_id": flight_id,

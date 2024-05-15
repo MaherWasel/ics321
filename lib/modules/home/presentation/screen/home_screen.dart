@@ -18,6 +18,7 @@ class HomeScreen extends ConsumerWidget{
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     final bottomBarIndex=ref.watch(bottomBarProvider);
+    Utils.reusableTicket=null;
     return Scaffold(
      appBar: AppBar(
       automaticallyImplyLeading: false,

@@ -152,7 +152,7 @@ class TicketRepository {
     if (ticket.status == "paid") {
       await Supabase.instance.client.from("Payment").insert({
         "method": "Credit Card",
-        'amount': ticket.price,
+        'amount': ticket.price!*0.9,
         "user_id": ticket.user_id,
         "status": "Refund",
         "ticket_id": ticket.id
