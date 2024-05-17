@@ -110,7 +110,7 @@ class BookingRepository {
         .eq("user_id", UuidValue.fromString(Utils.userId).toFormattedString())
         .eq("flight_id", flight_id);
     if (Utils.reusableTicket!=null){
-      await Supabase.instance.client.from("Ticket").delete().eq("id", Utils.reusableTicket!.id);
+      await Supabase.instance.client.from("Ticket").update({"status":"Expired"}).eq("id", Utils.reusableTicket!.id);
     }
     if (response.length == 10) {
       throw Exception();

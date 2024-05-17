@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ics321/core/utils/utils.dart';
 import 'package:ics321/modules/home/presentation/widget/flight_card.dart';
+import 'package:ics321/modules/my_tickets/presentation/widget/pay.dart';
 import 'package:ics321/modules/my_tickets/presentation/widget/seats_picker.dart';
 import 'package:ics321/shared/models/ticket.dart';
 import 'package:ics321/modules/my_tickets/presentation/provider/provider.dart';
@@ -201,141 +202,7 @@ class TicketCard extends ConsumerWidget {
                     onPressed: () {
                       showBottomSheet(
                           context: context,
-                          builder: (context) => Container(
-                                width: double.infinity,
-                                height: 300,
-                                decoration: BoxDecoration(
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(30),
-                                        topRight: Radius.circular(30))),
-                                child: Builder(builder: (context) {
-                                  if (ticketStates is TicketLoading) {
-                                    return const Center(
-                                      child: const CircularProgressIndicator(),
-                                    );
-                                  }
-
-                                  return Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Padding(
-                                        padding: EdgeInsets.all(8.0),
-                                        child: CustomText(
-                                          "Pay With:",
-                                          fontsize: 32,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () async {
-                                          await ref
-                                              .read(myTicketPaymentProvider
-                                                  .notifier)
-                                              .payTicket(
-                                                  ticket: ticket,
-                                                  user_id: UuidValue.fromString(
-                                                          Utils.userId)
-                                                      .toFormattedString(),
-                                                  context: context);
-                                          Navigator.pop(context);
-                                          refresh();
-                                        },
-                                        child: Container(
-                                          margin: const EdgeInsets.all(8),
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0,
-                                                      3), // changes position of shadow
-                                                ),
-                                              ]),
-                                          child: const Center(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child:
-                                                      Icon(Icons.credit_card),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: CustomText(
-                                                      "With credit card"),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () async {
-                                          await ref
-                                              .read(myTicketPaymentProvider
-                                                  .notifier)
-                                              .payTicket(
-                                                  ticket: ticket,
-                                                  user_id: UuidValue.fromString(
-                                                          Utils.userId)
-                                                      .toFormattedString(),
-                                                  context: context);
-                                          Navigator.pop(context);
-                                          refresh();
-                                        },
-                                        child: Container(
-                                          margin: const EdgeInsets.all(8),
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              color: Colors.white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0,
-                                                      3), // changes position of shadow
-                                                ),
-                                              ]),
-                                          child: const Center(
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: Icon(
-                                                    FontAwesomeIcons.applePay,
-                                                    size: 36,
-                                                  ),
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.all(8.0),
-                                                  child: CustomText(
-                                                      "With Apple Pay"),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                }),
-                              ));
+                          builder: (context) =>Pay(ticket, ()=>refresh()));
                     }),
               )
             else if (ticket.status == "waitList")

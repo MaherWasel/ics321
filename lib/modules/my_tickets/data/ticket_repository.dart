@@ -138,12 +138,16 @@ class TicketRepository {
   }
 
   Future<bool?> cancelTicket({required Ticket ticket}) async {
-    await Supabase.instance.client
+    if (ticket.status=="waitList"){
+      await Supabase.instance.client.from("Ticket").update({"status":"Cancelled"}).eq("id", ticket.id);
+
+    }
+    else {
+  await Supabase.instance.client
         .from("Ticket")
         .update({"status": "Cancelled"})
-        .eq("flight_id", ticket.flight!.id)
-        .eq('user_id', ticket.user_id!)
-        .eq("seat_location", ticket.seat_location!);
+        .eq("id", ticket.id);
+
     await Supabase.instance.client
         .from("Seat")
         .update({"status": null})
@@ -164,6 +168,8 @@ class TicketRepository {
 
     return res_em;
   }
+    }
+   
 
   Future<Plane?> getPlane({required String planeId}) async {
     final response =
