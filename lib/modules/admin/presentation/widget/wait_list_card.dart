@@ -177,6 +177,9 @@ class _WaitListCardState extends ConsumerState<WaitListCard> {
                 )
               ],
             ),
+            Text("${"userID".tr()} : ${widget.ticket.user_id}"),
+            Text("${"tickedID".tr()} : ${widget.ticket.id}   "),
+
             if (widget.ticket.status=="not paid")
             SizedBox(
               width:300,

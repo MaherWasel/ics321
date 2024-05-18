@@ -36,7 +36,7 @@
     "pay":"Pay",
     "notPaid":"Not Paid",
     "sr":"SR",
-    "deleteTicket":"Delete The Ticket",
+    "cancelTicket":"Cancel The Ticket",
     "admin":"Admin",
     "manage":"Manage",
     "cancelld":"Cancelled",
@@ -70,6 +70,9 @@
     "no":"No",
     "waitList":"WaitList",
     "cancelled":"Cancelled",
-    "classType":"Class Type"
+    "classType":"Class Type",
+    "expired":"Expired",
+    "reusable":"ReUsable",
+    "reSchedule":"ReSchedule"
 
 }

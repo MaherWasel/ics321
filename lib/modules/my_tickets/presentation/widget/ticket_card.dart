@@ -157,7 +157,7 @@ class TicketCard extends ConsumerWidget {
                   width: 10,
                 ),
                 if (ticket.status=="Expired")
-                CustomText('expired'.trim())
+                CustomText('expired'.tr())
                 else if (ticket.status=="Reusable")
                 CustomText('reusable'.trim())
                 else
@@ -193,6 +193,10 @@ class TicketCard extends ConsumerWidget {
                   child: CustomText(ticket.seat_location ?? ""),
                 )
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("${"tickedID".tr()} : ${ticket.id}        "),
             ),
             if (ticket.status == "not paid")
               SizedBox(

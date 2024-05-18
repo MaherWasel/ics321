@@ -6,9 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ics321/core/theme/app_theme.dart';
 import 'package:ics321/firebase_options.dart';
 import 'package:ics321/modules/auth/presentation/screens/splash_screen.dart';
-import 'package:ics321/modules/home/presentation/screen/home_screen.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:uuid/uuid.dart';
+
 
 void main() async {
   await Supabase.initialize(

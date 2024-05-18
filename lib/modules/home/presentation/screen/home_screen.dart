@@ -28,7 +28,10 @@ class HomeScreen extends ConsumerWidget{
                 FirebaseAuth.instance.signOut();
                 Utils.user=null;
                 Utils.userId="";
-                Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>const SplashScreen()));
+                Navigator.of(context).pushAndRemoveUntil(
+
+                  MaterialPageRoute(builder: (context)=>const SplashScreen()),
+                  ModalRoute.withName('/'));
                 
                 
               }, child: Row(
